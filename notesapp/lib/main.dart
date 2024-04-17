@@ -5,6 +5,9 @@ import 'package:notesapp/constants.dart';
 import 'views/notesVeiw.dart';
 
 void main() async {
+  WidgetsFlutterBinding
+      .ensureInitialized(); // Ensure that plugins are initialized before 'await'.
+
   await Hive.initFlutter();
   await Hive.openBox(KNotesBox);
   runApp(const NotesApp());
