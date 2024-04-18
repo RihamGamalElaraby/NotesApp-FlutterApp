@@ -6,14 +6,19 @@ import 'package:notesapp/models/NoteModel.dart';
 
 class AddNotesCubit extends Cubit<AddNotesStates> {
   AddNotesCubit() : super(AddNotesInitial());
+  // bool isLoading = false;
 
   addNote(NoteModel note) async {
     emit(AddNotesLoading());
+    // isLoading = true;
     try {
       var notesBox = Hive.box<NoteModel>(KNotesBox);
-      emit(AddNotesSuccsses());
+      // isLoading = false;
       await notesBox.add(note);
+      emit(AddNotesSuccsses());
     } on Exception catch (e) {
+      // isLoading = false;
+
       emit(AddNotesFail(e.toString()));
     }
   }
