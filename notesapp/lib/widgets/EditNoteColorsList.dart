@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notesapp/constants.dart';
-import 'package:notesapp/cubits/AddNoteCubit/AddNotesCubit.dart';
+import 'package:notesapp/models/NoteModel.dart';
 import 'package:notesapp/widgets/ColorsItem.dart';
 
-class ColorsListView extends StatefulWidget {
-  const ColorsListView({super.key});
+class EditNotesColorsList extends StatefulWidget {
+  EditNotesColorsList({super.key, required this.note});
+  final NoteModel note;
 
   @override
-  State<ColorsListView> createState() => _ColorsListViewState();
+  State<EditNotesColorsList> createState() => _EditNotesColorsListState();
 }
 
-class _ColorsListViewState extends State<ColorsListView> {
-  int currenIndex = 0;
+class _EditNotesColorsListState extends State<EditNotesColorsList> {
+  late int currenIndex;
 
   @override
+  void initState() {
+    currenIndex = kcolors.indexOf(Color(widget.note.color));
+    // TODO: implement initState
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     return SizedBox(
       height: 60,
@@ -26,8 +32,8 @@ class _ColorsListViewState extends State<ColorsListView> {
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: GestureDetector(
               onTap: () {
-                BlocProvider.of<AddNotesCubit>(context).color = kcolors[index];
                 setState(() {
+                  widget.note.color = kcolors[index].value;
                   currenIndex = index;
                   print(currenIndex);
                 });

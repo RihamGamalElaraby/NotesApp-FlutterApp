@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notesapp/cubits/notesCubit/NotesCubit.dart';
 import 'package:notesapp/models/NoteModel.dart';
 import 'package:notesapp/widgets/CustomAppBar.dart';
+import 'package:notesapp/widgets/EditNoteColorsList.dart';
 import 'package:notesapp/widgets/TextField.dart';
 
 class EditNoteViewBody extends StatefulWidget {
@@ -35,6 +36,9 @@ class _EditNoteViewBodyState extends State<EditNoteViewBody> {
             title: 'Edit Note',
             icon: Icons.edit,
           ),
+          SizedBox(
+            height: 10,
+          ),
           CustomTextField(
               onchanged: (val) {
                 title = val;
@@ -49,6 +53,12 @@ class _EditNoteViewBodyState extends State<EditNoteViewBody> {
               subtitle = val;
             },
             maxLines: 5,
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          EditNotesColorsList(
+            note: widget.note,
           ),
         ],
       ),
